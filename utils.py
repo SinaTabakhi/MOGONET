@@ -47,7 +47,7 @@ def cal_adj_mat_parameter(edge_per_node, data, metric="cosine"):
     assert metric == "cosine", "Only cosine distance implemented"
     dist = cosine_distance_torch(data, data)
     parameter = torch.sort(dist.reshape(-1,)).values[edge_per_node*data.shape[0]]
-    return np.asscalar(parameter.data.cpu().numpy())
+    return parameter.item()
 
 
 def graph_from_dist_tensor(dist, parameter, self_dist=True):
